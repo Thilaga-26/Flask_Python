@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+<h1 style="color:purple">Employees Details Management Using Flask & MySQL</h1>
+
+<h4 style="color:blue">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</h4>
+
+<h3><p><b><a style="color:green" href="{{url_for('addemployee')}}">Add Employee Details</a></b></p></h3>
+
+<h4>
+<table bgcolor="peachpuff" width="900px" height="200">
+    <tr bgcolor="skyblue" >
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Department</th>
+        <th>Email</th>
+        <th>PhoneNo</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+      {% for data in database %}
+        <tr>
+            <td>{{data.Id}}</td>
+            <td>{{data.Name}}</td>
+            <td>{{data.Age}}</td>
+            <td>{{data.Department}}</td>
+            <td>{{data.Email}}</td>
+            <td>{{data.PhoneNo}}</td>
+            <td>{{data.Address}}</td>
+            <td><a style="color:blue" href="{{url_for('updateemployee',id=data.Id)}}">Update</a></td>
+            <td><a style="color:red" onclick="return confirm('Are u sure!!!,You want to Delete Employee Details');" href="{{url_for('deleteemployee',id=data.Id)}}">Delete</a></td>
+        </tr>
+     {% endfor %}
+</table>
+</h4>
+</body>
+</html>
